@@ -1,0 +1,245 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.solarbuffer",
+  "version": "0.1.0",
+  "compatibility": ">=12.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "SolarBuffer",
+    "nl": "SolarBuffer"
+  },
+  "description": {
+    "en": "Control your SolarBuffer hub locally: see your grid power, solar, battery and every SolarBuffer, and steer them from Flows.",
+    "nl": "Bestuur je SolarBuffer-hub lokaal: zie je netvermogen, zon, accu en elke SolarBuffer, en stuur ze vanuit Flows."
+  },
+  "category": [
+    "energy"
+  ],
+  "brandColor": "#E8821E",
+  "permissions": [],
+  "author": {
+    "name": "SolarBuffer",
+    "email": "info@solarbuffer.nl"
+  },
+  "support": "mailto:info@solarbuffer.nl",
+  "homepage": "https://www.solarbuffer.nl",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "SolarBuffer",
+        "nl": "SolarBuffer"
+      },
+      "class": "heater",
+      "capabilities": [
+        "sb_status",
+        "onoff",
+        "dim",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "en": "Output",
+            "nl": "Stand"
+          }
+        },
+        "meter_power": {
+          "title": {
+            "en": "Energy today",
+            "nl": "Energie vandaag"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/buffer/assets/images/small.png",
+        "large": "/drivers/buffer/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "buffer"
+    },
+    {
+      "name": {
+        "en": "SolarBuffer Hub",
+        "nl": "SolarBuffer Hub"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "sb_status",
+        "onoff",
+        "onoff.schedules",
+        "onoff.legionella",
+        "onoff.vacation",
+        "measure_power"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Regulation",
+            "nl": "Regeling"
+          }
+        },
+        "onoff.schedules": {
+          "title": {
+            "en": "Schedules",
+            "nl": "Tijdschema's"
+          }
+        },
+        "onoff.legionella": {
+          "title": {
+            "en": "Anti-legionella",
+            "nl": "Anti-legionella"
+          }
+        },
+        "onoff.vacation": {
+          "title": {
+            "en": "Vacation mode",
+            "nl": "Vakantiestand"
+          }
+        },
+        "measure_power": {
+          "title": {
+            "en": "Grid power",
+            "nl": "Netvermogen"
+          }
+        },
+        "measure_power.solar": {
+          "title": {
+            "en": "Solar power",
+            "nl": "Zonnevermogen"
+          }
+        },
+        "measure_power.battery": {
+          "title": {
+            "en": "Battery power",
+            "nl": "Accuvermogen"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "discovery": "solarbuffer",
+      "images": {
+        "small": "/drivers/hub/assets/images/small.png",
+        "large": "/drivers/hub/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "hub",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Login",
+            "nl": "Inloggen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Username",
+                "nl": "Gebruikersnaam"
+              },
+              "value": "",
+              "hint": {
+                "en": "An account that can log in to the SolarBuffer web interface. Use an administrator account, otherwise the regulation cannot be switched.",
+                "nl": "Een account dat op de SolarBuffer-webinterface kan inloggen. Gebruik een beheerdersaccount, anders is de regeling niet te schakelen."
+              }
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "sb_soc": {
+      "type": "number",
+      "title": {
+        "en": "Battery level",
+        "nl": "Laadstand accu"
+      },
+      "units": {
+        "en": "%"
+      },
+      "min": 0,
+      "max": 100,
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true
+    },
+    "sb_status": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    }
+  },
+  "discovery": {
+    "solarbuffer": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "solarbuffer",
+        "protocol": "tcp"
+      },
+      "id": "{{txt.id}}"
+    }
+  }
+}

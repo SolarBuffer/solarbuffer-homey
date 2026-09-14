@@ -1,0 +1,51 @@
+{
+  "name": {
+    "en": "SolarBuffer",
+    "nl": "SolarBuffer"
+  },
+  "class": "heater",
+  "capabilities": [
+    "sb_status",
+    "onoff",
+    "dim",
+    "measure_power",
+    "meter_power"
+  ],
+  "capabilitiesOptions": {
+    "dim": {
+      "title": {
+        "en": "Output",
+        "nl": "Stand"
+      }
+    },
+    "meter_power": {
+      "title": {
+        "en": "Energy today",
+        "nl": "Energie vandaag"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/buffer/assets/images/small.png",
+    "large": "/drivers/buffer/assets/images/large.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

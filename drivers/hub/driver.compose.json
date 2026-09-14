@@ -1,0 +1,83 @@
+{
+  "name": {
+    "en": "SolarBuffer Hub",
+    "nl": "SolarBuffer Hub"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "sb_status",
+    "onoff",
+    "onoff.schedules",
+    "onoff.legionella",
+    "onoff.vacation",
+    "measure_power"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Regulation",
+        "nl": "Regeling"
+      }
+    },
+    "onoff.schedules": {
+      "title": {
+        "en": "Schedules",
+        "nl": "Tijdschema's"
+      }
+    },
+    "onoff.legionella": {
+      "title": {
+        "en": "Anti-legionella",
+        "nl": "Anti-legionella"
+      }
+    },
+    "onoff.vacation": {
+      "title": {
+        "en": "Vacation mode",
+        "nl": "Vakantiestand"
+      }
+    },
+    "measure_power": {
+      "title": {
+        "en": "Grid power",
+        "nl": "Netvermogen"
+      }
+    },
+    "measure_power.solar": {
+      "title": {
+        "en": "Solar power",
+        "nl": "Zonnevermogen"
+      }
+    },
+    "measure_power.battery": {
+      "title": {
+        "en": "Battery power",
+        "nl": "Accuvermogen"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "discovery": "solarbuffer",
+  "images": {
+    "small": "/drivers/hub/assets/images/small.png",
+    "large": "/drivers/hub/assets/images/large.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

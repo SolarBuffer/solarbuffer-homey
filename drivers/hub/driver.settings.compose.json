@@ -1,0 +1,24 @@
+[
+  {
+    "type": "group",
+    "label": { "en": "Login", "nl": "Inloggen" },
+    "children": [
+      {
+        "id": "username",
+        "type": "text",
+        "label": { "en": "Username", "nl": "Gebruikersnaam" },
+        "value": "",
+        "hint": {
+          "en": "An account that can log in to the SolarBuffer web interface. Use an administrator account, otherwise the regulation cannot be switched.",
+          "nl": "Een account dat op de SolarBuffer-webinterface kan inloggen. Gebruik een beheerdersaccount, anders is de regeling niet te schakelen."
+        }
+      },
+      {
+        "id": "password",
+        "type": "password",
+        "label": { "en": "Password", "nl": "Wachtwoord" },
+        "value": ""
+      }
+    ]
+  }
+]
