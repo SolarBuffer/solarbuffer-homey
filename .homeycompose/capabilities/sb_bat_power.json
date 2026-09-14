@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": { "en": "Manual battery power", "nl": "Handmatig accuvermogen" },
+  "units": { "en": "W" },
+  "min": 0,
+  "max": 2500,
+  "step": 50,
+  "decimals": 0,
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider"
+}

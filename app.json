@@ -43,7 +43,8 @@
         "onoff",
         "dim",
         "measure_power",
-        "meter_power"
+        "meter_power",
+        "button"
       ],
       "capabilitiesOptions": {
         "dim": {
@@ -57,6 +58,13 @@
             "en": "Energy today",
             "nl": "Energie vandaag"
           }
+        },
+        "button": {
+          "title": {
+            "en": "Boost",
+            "nl": "Boost"
+          },
+          "maintenanceAction": false
         }
       },
       "platforms": [
@@ -203,6 +211,82 @@
     }
   ],
   "capabilities": {
+    "sb_bat_direction": {
+      "type": "enum",
+      "title": {
+        "en": "Battery direction",
+        "nl": "Accurichting"
+      },
+      "values": [
+        {
+          "id": "charge",
+          "title": {
+            "en": "Charge",
+            "nl": "Laden"
+          }
+        },
+        {
+          "id": "discharge",
+          "title": {
+            "en": "Discharge",
+            "nl": "Ontladen"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "sb_bat_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Battery mode",
+        "nl": "Accustand"
+      },
+      "values": [
+        {
+          "id": "auto",
+          "title": {
+            "en": "Automatic",
+            "nl": "Automatisch"
+          }
+        },
+        {
+          "id": "manual",
+          "title": {
+            "en": "Manual",
+            "nl": "Handmatig"
+          }
+        },
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "nl": "Uit"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "sb_bat_power": {
+      "type": "number",
+      "title": {
+        "en": "Manual battery power",
+        "nl": "Handmatig accuvermogen"
+      },
+      "units": {
+        "en": "W"
+      },
+      "min": 0,
+      "max": 2500,
+      "step": 50,
+      "decimals": 0,
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider"
+    },
     "sb_soc": {
       "type": "number",
       "title": {

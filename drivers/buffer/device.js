@@ -21,6 +21,15 @@ class BufferDevice extends Homey.Device {
       this.verversSnel();
     });
 
+    this.registerCapabilityListener('button', async () => {
+      // Boost is bij de hub een omschakelaar: nog een keer drukken breekt een
+      // lopende boost af. Dat past bij een knop, want die kent geen stand.
+      const { api, ip } = this.hubGegevens();
+      this.log('boost gevraagd');
+      await api.boostDevice(ip);
+      this.verversSnel();
+    });
+
     this.registerCapabilityListener('dim', async (waarde) => {
       const { hub, api, ip } = this.hubGegevens();
 

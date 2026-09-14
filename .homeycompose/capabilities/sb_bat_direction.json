@@ -1,0 +1,11 @@
+{
+  "type": "enum",
+  "title": { "en": "Battery direction", "nl": "Accurichting" },
+  "values": [
+    { "id": "charge",    "title": { "en": "Charge",    "nl": "Laden" } },
+    { "id": "discharge", "title": { "en": "Discharge", "nl": "Ontladen" } }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}

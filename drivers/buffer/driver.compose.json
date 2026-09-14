@@ -9,7 +9,8 @@
     "onoff",
     "dim",
     "measure_power",
-    "meter_power"
+    "meter_power",
+    "button"
   ],
   "capabilitiesOptions": {
     "dim": {
@@ -23,6 +24,13 @@
         "en": "Energy today",
         "nl": "Energie vandaag"
       }
+    },
+    "button": {
+      "title": {
+        "en": "Boost",
+        "nl": "Boost"
+      },
+      "maintenanceAction": false
     }
   },
   "platforms": [

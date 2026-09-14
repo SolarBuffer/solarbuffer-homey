@@ -20,6 +20,22 @@ class HubDevice extends Homey.Device {
     this.schakelaar('onoff.legionella', 'anti_legionella_enabled', (api, aan) => api.setAntiLegionella(aan));
     this.schakelaar('onoff.vacation', 'vacation_mode', (api, aan) => api.setVacation(aan, this.status?.vacation_legionella));
 
+    // De accubediening stuurt drie dingen die samen één opdracht vormen, dus
+    // sturen we bij elke wijziging de hele combinatie mee. Anders zou de hub
+    // een halve opdracht krijgen en op een oud of leeg setpoint gaan staan.
+    this.registerCapabilityListener('sb_bat_mode', async (stand) => {
+      this.log(`accustand gevraagd: ${stand}`);
+      await this.accuOpdracht({ mode: stand });
+    });
+    this.registerCapabilityListener('sb_bat_direction', async (richting) => {
+      this.log(`accurichting gevraagd: ${richting}`);
+      await this.accuOpdracht({ direction: richting });
+    });
+    this.registerCapabilityListener('sb_bat_power', async (vermogen) => {
+      this.log(`accuvermogen gevraagd: ${vermogen} W`);
+      await this.accuOpdracht({ power: Math.round(Number(vermogen) || 0) });
+    });
+
     await this.maakApi();
     this.startPolling();
   }
@@ -44,6 +60,25 @@ class HubDevice extends Homey.Device {
       }
       this.verversSnel();
     });
+  }
+
+  /**
+   * Stuurt een accu-opdracht, aangevuld met wat er niet is meegegeven.
+   *
+   * De hub verwacht stand, richting en vermogen als één geheel. Geef je alleen
+   * een nieuwe richting door, dan moet het bestaande vermogen mee, anders valt
+   * dat terug op nul en staat de accu stil terwijl je alleen de richting wilde
+   * omzetten.
+   */
+  async accuOpdracht({ mode, direction, power }) {
+    if (!this.api) throw new Error('Vul eerst gebruikersnaam en wachtwoord in bij dit apparaat');
+    const d = this.status || {};
+    await this.api.setBatteryMode(
+      mode ?? d.battery_control_mode ?? 'auto',
+      direction ?? d.battery_manual_direction ?? 'charge',
+      power ?? d.battery_manual_power ?? 0,
+    );
+    this.verversSnel();
   }
 
   async maakApi() {
@@ -135,6 +170,18 @@ class HubDevice extends Homey.Device {
     if (heeftAccu) {
       await this.zet('sb_soc', accu.soc !== null && accu.soc !== undefined ? Number(accu.soc) : null);
       await this.zet('measure_power.battery', accu.power_w !== null && accu.power_w !== undefined ? Number(accu.power_w) : null);
+    }
+
+    // Bedienen kan de hub alleen bij een gekoppelde Zendure; bij de andere
+    // merken weigert hij de opdracht. Dan tonen we die knoppen dus ook niet.
+    const bedienbaar = heeftAccu && d.battery_type === 'zendure';
+    await this.regelCapability('sb_bat_mode', bedienbaar);
+    await this.regelCapability('sb_bat_direction', bedienbaar);
+    await this.regelCapability('sb_bat_power', bedienbaar);
+    if (bedienbaar) {
+      await this.zet('sb_bat_mode', d.battery_control_mode || 'auto');
+      await this.zet('sb_bat_direction', d.battery_manual_direction || 'charge');
+      await this.zet('sb_bat_power', Number(d.battery_manual_power) || 0);
     }
   }
 

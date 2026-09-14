@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "title": { "en": "Battery mode", "nl": "Accustand" },
+  "values": [
+    { "id": "auto",   "title": { "en": "Automatic", "nl": "Automatisch" } },
+    { "id": "manual", "title": { "en": "Manual",    "nl": "Handmatig" } },
+    { "id": "off",    "title": { "en": "Off",       "nl": "Uit" } }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}
