@@ -11,8 +11,8 @@
     "nl": "SolarBuffer"
   },
   "description": {
-    "en": "Control your SolarBuffer hub locally: see your grid power, solar, battery and every SolarBuffer, and steer them from Flows.",
-    "nl": "Bestuur je SolarBuffer-hub lokaal: zie je netvermogen, zon, accu en elke SolarBuffer, en stuur ze vanuit Flows."
+    "en": "Turn your solar surplus into hot water, and keep an eye on your boiler and home battery from Homey.",
+    "nl": "Zet je zonoverschot om in warm water en houd je boiler en thuisbatterij in de gaten vanuit Homey."
   },
   "category": [
     "energy"
