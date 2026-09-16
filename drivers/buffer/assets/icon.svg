@@ -5,7 +5,7 @@
   herkennen en daar struikelde de beoordeling terecht over.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <g fill="none" stroke="currentColor" stroke-width="13"
+  <g transform="translate(-0.81 -4.86) scale(1.0103)" fill="none" stroke="currentColor" stroke-width="13"
      stroke-linecap="round" stroke-linejoin="round">
     <rect x="38" y="52" width="180" height="116" rx="18"/>
     <circle cx="128" cy="110" r="36"/>

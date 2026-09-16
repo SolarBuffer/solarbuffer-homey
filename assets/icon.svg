@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  App-icoon: het merk. Een zon die een druppel warm water maakt, dat is waar
-  SolarBuffer voor staat. Lijnwerk, want Homey kleurt dit zelf in en een
-  dichtgevlakte vorm wordt dan een onherkenbare klodder.
-  Bewust anders dan de twee driver-iconen, zodat je ze uit elkaar houdt.
+  App-icoon: het merk. Zon boven een druppel warm water.
+  Bewust gevulde vormen en geen lijnwerk: Homey gebruikt dit icoon als
+  silhouet en vult het met de merkkleur. Een icoon dat alleen uit lijnen
+  bestaat komt er dan als een egaal vlak uit.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <g fill="none" stroke="currentColor" stroke-width="13"
-     stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="128" cy="76" r="34"/>
-    <path d="M128 18v16"/>
-    <path d="M128 118v16"/>
-    <path d="M70 76H54"/>
-    <path d="M202 76h-16"/>
-    <path d="M87 35l11 11"/>
-    <path d="M169 35l-11 11"/>
-    <path d="M87 117l11-11"/>
-    <path d="M169 117l-11-11"/>
-    <path d="M128 158c-22 26-34 42-34 56a34 34 0 0 0 68 0c0-14-12-30-34-56z"/>
+  <g transform="translate(22.56 18.84) scale(0.8270)" fill="currentColor">
+    <circle cx="128" cy="78" r="30"/>
+    <rect x="120" y="14" width="16" height="26" rx="8"/>
+    <rect x="120" y="116" width="16" height="26" rx="8"/>
+    <rect x="56" y="70" width="26" height="16" rx="8"/>
+    <rect x="174" y="70" width="26" height="16" rx="8"/>
+    <rect x="72" y="26" width="16" height="26" rx="8" transform="rotate(-45 80 39)"/>
+    <rect x="168" y="26" width="16" height="26" rx="8" transform="rotate(45 176 39)"/>
+    <rect x="72" y="104" width="16" height="26" rx="8" transform="rotate(45 80 117)"/>
+    <rect x="168" y="104" width="16" height="26" rx="8" transform="rotate(-45 176 117)"/>
+    <path d="M128 150c-24 30-38 48-38 63a38 38 0 0 0 76 0c0-15-14-33-38-63z"/>
   </g>
 </svg>

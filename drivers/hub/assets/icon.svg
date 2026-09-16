@@ -5,7 +5,7 @@
   dat was niet te onderscheiden van het app-icoon.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <g fill="none" stroke="currentColor" stroke-width="13"
+  <g transform="translate(-9.31 -35.69) scale(1.0769)" fill="none" stroke="currentColor" stroke-width="13"
      stroke-linecap="round" stroke-linejoin="round">
     <path d="M78 96a70 70 0 0 1 100 0"/>
     <path d="M104 126a34 34 0 0 1 48 0"/>
