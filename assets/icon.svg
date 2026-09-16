@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   App-icoon: het merk. Zon boven een druppel warm water.
-  Bewust gevulde vormen en geen lijnwerk: Homey gebruikt dit icoon als
-  silhouet en vult het met de merkkleur. Een icoon dat alleen uit lijnen
-  bestaat komt er dan als een egaal vlak uit.
+  Gevulde vormen, en met een uitgeschreven kleur in plaats van currentColor.
+  Homey haalt dit bestand los op en gebruikt het als masker; er is dan geen
+  omgeving om een kleur van te erven, waardoor currentColor nergens op
+  uitkomt en het masker wegvalt. Wit werkt bij een masker op doorzichtigheid,
+  bij een masker op helderheid, en als het icoon rechtstreeks getekend wordt.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <g transform="translate(22.56 18.84) scale(0.8270)" fill="currentColor">
+  <g transform="translate(22.56 18.84) scale(0.8270)" fill="#FFFFFF">
     <circle cx="128" cy="78" r="30"/>
     <rect x="120" y="14" width="16" height="26" rx="8"/>
     <rect x="120" y="116" width="16" height="26" rx="8"/>
