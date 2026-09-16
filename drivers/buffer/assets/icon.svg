@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SolarBuffer: het kastje met het stopcontact waar de boiler in gaat, met de
+  kabel eronder. Eerder was dit een dichte rechthoek; daar viel niets aan te
+  herkennen en daar struikelde de beoordeling terecht over.
+-->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <g fill="currentColor">
-    <rect x="76" y="40" width="104" height="176" rx="34"/>
-    <rect x="116" y="8" width="24" height="40" rx="12"/>
-    <rect x="52" y="96" width="30" height="16" rx="8"/>
-    <rect x="174" y="150" width="30" height="16" rx="8"/>
+  <g fill="none" stroke="currentColor" stroke-width="13"
+     stroke-linecap="round" stroke-linejoin="round">
+    <rect x="38" y="52" width="180" height="116" rx="18"/>
+    <circle cx="128" cy="110" r="36"/>
+    <circle cx="112" cy="110" r="5.5" fill="currentColor" stroke="none"/>
+    <circle cx="144" cy="110" r="5.5" fill="currentColor" stroke="none"/>
+    <path d="M128 168v20a24 24 0 0 1-24 24H72"/>
   </g>
 </svg>

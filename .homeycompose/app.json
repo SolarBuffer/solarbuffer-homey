@@ -1,6 +1,6 @@
 {
   "id": "com.solarbuffer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "platforms": [
@@ -11,8 +11,8 @@
     "nl": "SolarBuffer"
   },
   "description": {
-    "en": "Turn your solar surplus into hot water, and keep an eye on your boiler and home battery from Homey.",
-    "nl": "Zet je zonoverschot om in warm water en houd je boiler en thuisbatterij in de gaten vanuit Homey."
+    "en": "Turn your solar surplus into hot water",
+    "nl": "Zet je zonoverschot om in warm water"
   },
   "category": [
     "energy"
