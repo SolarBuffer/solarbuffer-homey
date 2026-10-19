@@ -1,0 +1,103 @@
+{
+  "triggers": [
+    {
+      "id": "warmte_niveau_veranderd",
+      "title": {
+        "en": "The heat level changed",
+        "nl": "Het warmteniveau is veranderd"
+      },
+      "hint": {
+        "en": "Fires whenever the share of heat in the tank changes.",
+        "nl": "Gaat af zodra het aandeel warmte in het vat verandert."
+      },
+      "tokens": [
+        {
+          "name": "niveau",
+          "type": "number",
+          "title": { "en": "Level", "nl": "Niveau" },
+          "example": 65
+        },
+        {
+          "name": "warmte",
+          "type": "number",
+          "title": { "en": "Heat stored", "nl": "Warmtevoorraad" },
+          "example": 4.15
+        }
+      ]
+    },
+    {
+      "id": "vat_doorgewarmd",
+      "title": {
+        "en": "The tank has been heated through",
+        "nl": "Het vat is doorgewarmd"
+      },
+      "hint": {
+        "en": "Fires when the heat reservoir reaches its ceiling, either because the energy went in or because the thermostat cut out. This is also the moment the legionella clock restarts.",
+        "nl": "Gaat af als de warmtevoorraad het plafond raakt, doordat de energie erin is gegaan of doordat de thermostaat afsloeg. Dat is ook het moment waarop de legionellaklok opnieuw begint."
+      }
+    },
+    {
+      "id": "legionella_gestart",
+      "title": {
+        "en": "The legionella cycle started",
+        "nl": "De legionellaronde is begonnen"
+      }
+    },
+    {
+      "id": "legionella_klaar",
+      "title": {
+        "en": "The legionella cycle finished",
+        "nl": "De legionellaronde is klaar"
+      }
+    },
+    {
+      "id": "doorwarming_nodig",
+      "title": {
+        "en": "A heat-through became due",
+        "nl": "Doorwarming is nodig geworden"
+      },
+      "hint": {
+        "en": "Fires when the hub decides the tank has gone too long without being heated through.",
+        "nl": "Gaat af als de hub vaststelt dat het vat te lang niet is doorgewarmd."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "warmte_niveau_is",
+      "title": {
+        "en": "The heat level !{{is|is not}} above",
+        "nl": "Het warmteniveau !{{is|is niet}} hoger dan"
+      },
+      "titleFormatted": {
+        "en": "The heat level !{{is|is not}} above [[niveau]]%",
+        "nl": "Het warmteniveau !{{is|is niet}} hoger dan [[niveau]]%"
+      },
+      "args": [
+        {
+          "name": "niveau",
+          "type": "number",
+          "title": { "en": "Level", "nl": "Niveau" },
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "placeholder": { "en": "Level in %", "nl": "Niveau in %" }
+        }
+      ]
+    },
+    {
+      "id": "legionella_loopt",
+      "title": {
+        "en": "The legionella cycle !{{is|is not}} running",
+        "nl": "De legionellaronde !{{loopt|loopt niet}}"
+      }
+    },
+    {
+      "id": "doorwarming_is_nodig",
+      "title": {
+        "en": "A heat-through !{{is|is not}} due",
+        "nl": "Doorwarming !{{is|is niet}} nodig"
+      }
+    }
+  ]
+}

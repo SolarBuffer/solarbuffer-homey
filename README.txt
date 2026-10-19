@@ -12,7 +12,7 @@ WHAT YOU CAN DO
 
 Switch the regulation, schedules, anti-legionella and holiday mode. Turn each SolarBuffer on or off, set it by hand, or give it a boost. With a Zendure battery connected you can also set the battery mode, direction and power.
 
-All of it works in Flows, so you can combine your hot water with everything else in your home.
+All of it works in Flows, so you can combine your hot water with everything else in your home. A Flow can also start on a changed heat level, on a tank that has been heated through, or on the start and end of a legionella cycle.
 
 GOOD TO KNOW
 

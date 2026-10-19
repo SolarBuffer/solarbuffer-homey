@@ -13,5 +13,8 @@
   },
   "0.2.0": {
     "en": "Per SolarBuffer zie je nu de warmtevoorraad in het vat, het niveau, de capaciteit, de resterende tijd tot vol, en of er een doorwarmronde tegen legionella loopt. Op een hub 0.8.1 of nieuwer komen die rijen er zelf bij, zonder opnieuw koppelen."
+  },
+  "0.3.0": {
+    "en": "Flow-kaarten voor de warmtevoorraad en de legionellaronde. Je kunt nu een flow laten beginnen bij een veranderd warmteniveau, bij een vat dat doorgewarmd is, bij het begin en het einde van een ronde, en bij een doorwarming die nodig wordt. Daarnaast drie voorwaarden om op het niveau en op de stand van de ronde te toetsen."
   }
 }

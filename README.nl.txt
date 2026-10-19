@@ -12,7 +12,7 @@ WAT JE KUNT DOEN
 
 De regeling, tijdschema's, anti-legionella en de vakantiestand aan en uit zetten. Elke SolarBuffer aan of uit, handmatig op een stand zetten, of een boost geven. Met een gekoppelde Zendure ook de accustand, de richting en het vermogen.
 
-Het werkt allemaal in Flows, dus je kunt je warm water combineren met alles wat er verder in huis gebeurt.
+Het werkt allemaal in Flows, dus je kunt je warm water combineren met alles wat er verder in huis gebeurt. Je kunt een flow ook laten beginnen bij een veranderd warmteniveau, bij een vat dat doorgewarmd is, of bij het begin en het einde van een legionellaronde.
 
 GOED OM TE WETEN
 

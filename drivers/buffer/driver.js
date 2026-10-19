@@ -6,6 +6,31 @@ class BufferDriver extends Homey.Driver {
 
   async onInit() {
     this.log('SolarBuffer-driver gestart');
+    this.registreerVoorwaarden();
+  }
+
+  /**
+   * De kaarten onder En... lezen alleen de laatste stand; de kaarten onder
+   * Als... worden vanuit het apparaat zelf afgevuurd. Draait een apparaat op
+   * een oudere hub, dan bestaat de capability niet en is het antwoord nee in
+   * plaats van een fout die de hele flow laat stranden.
+   */
+  registreerVoorwaarden() {
+    const lees = (device, capability) => (device.hasCapability(capability)
+      ? device.getCapabilityValue(capability)
+      : null);
+
+    this.homey.flow.getConditionCard('warmte_niveau_is')
+      .registerRunListener(async (args) => {
+        const niveau = lees(args.device, 'sb_warmte_niveau');
+        return typeof niveau === 'number' && niveau > args.niveau;
+      });
+
+    this.homey.flow.getConditionCard('legionella_loopt')
+      .registerRunListener(async (args) => lees(args.device, 'sb_legionella') === true);
+
+    this.homey.flow.getConditionCard('doorwarming_is_nodig')
+      .registerRunListener(async (args) => lees(args.device, 'sb_legionella_nodig') === true);
   }
 
   /**

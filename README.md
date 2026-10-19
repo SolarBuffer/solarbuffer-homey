@@ -58,9 +58,34 @@ hub ze doorgeeft, zonder dat je het apparaat opnieuw hoeft te koppelen.
 
 ## Flows
 
-Voor het gewone werk hoef je niets in te stellen: Homey maakt zelf al kaarten
-voor alles wat hierboven staat. Je kunt dus meteen bouwen op "de status is
-veranderd", "de regeling ging uit", "zet de boiler op 60%" of "geef een boost".
+Voor het gewone schakelwerk hoef je niets in te stellen. Homey maakt zelf
+kaarten voor zijn eigen metingen, dus je kunt meteen bouwen op "de regeling ging
+uit", "het vermogen is veranderd", "zet de boiler op 60%" of "geef een boost".
+
+Voor de warmtevoorraad en de legionellaronde maakt Homey niets vanzelf, want dat
+zijn onze eigen metingen. Daar zijn deze kaarten voor:
+
+| Als... | |
+|---|---|
+| Het warmteniveau is veranderd | met het niveau en de voorraad als tags |
+| Het vat is doorgewarmd | op het moment dat de voorraad het plafond raakt |
+| De legionellaronde is begonnen | |
+| De legionellaronde is klaar | |
+| Doorwarming is nodig geworden | |
+
+| En... | |
+|---|---|
+| Het warmteniveau is hoger dan een percentage | |
+| De legionellaronde loopt | |
+| Doorwarming is nodig | |
+
+De kaarten staan bij elke SolarBuffer, ook als je hub de warmtevoorraad nog niet
+doorgeeft. In dat geval gaat er niets af en antwoorden de voorwaarden met nee in
+plaats van met een fout, dus een flow die je nu bouwt gaat vanzelf werken zodra
+je de hub bijwerkt.
+
+Van de overige eigen metingen, de status en alles van de accu, kun je de waarde
+wel aflezen maar er nog geen flow op laten beginnen.
 
 ## Installeren
 

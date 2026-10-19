@@ -130,6 +130,19 @@ class BufferDevice extends Homey.Device {
     }
   }
 
+  /**
+   * Een Als-kaart afvuren. Een flow die stukloopt mag de ronde niet breken,
+   * want dan zou een enkele kapotte flow het verversen van alle waarden
+   * stilleggen.
+   */
+  async vuurAf(id, tokens = {}) {
+    try {
+      await this.homey.flow.getDeviceTriggerCard(id).trigger(this, tokens);
+    } catch (err) {
+      this.error(`Flow-kaart ${id} mislukt:`, err.message);
+    }
+  }
+
   /** Tijdstip in de tijdzone van de Homey, kort genoeg voor een tegel. */
   tijdstip(ts) {
     if (!ts) return null;
@@ -194,10 +207,16 @@ class BufferDevice extends Homey.Device {
     await this.stemCapabilitiesAf(WARMTE_CAPS, levert);
     if (!levert) return;
 
-    const nu = Number(d.warmte_kwh) || 0;
-    await this.zet('sb_warmte', Math.round(nu * 100) / 100);
+    // De stand van voor deze ronde, om de kaarten op een overgang af te vuren.
+    // Leeg bij een capability die er net bij is gekomen; dan vuren we niets af,
+    // anders meldt de app een doorwarming die al lang achter de rug is.
+    const vorigNiveau = this.getCapabilityValue('sb_warmte_niveau');
+
+    const nu = Math.round((Number(d.warmte_kwh) || 0) * 100) / 100;
+    const niveau = Math.max(0, Math.min(100, Math.round((nu / vol) * 100)));
+    await this.zet('sb_warmte', nu);
     await this.zet('sb_warmte_vol', Math.round(vol * 100) / 100);
-    await this.zet('sb_warmte_niveau', Math.max(0, Math.min(100, Math.round((nu / vol) * 100))));
+    await this.zet('sb_warmte_niveau', niveau);
 
     // Leeg zolang er niets in gaat: dan valt er niets af te tellen.
     const eta = d.warmte_eta_s;
@@ -205,6 +224,11 @@ class BufferDevice extends Homey.Device {
       ? null
       : Math.max(0, Math.round(Number(eta) / 60));
     await this.zetOfLeeg('sb_warmte_eta', minuten);
+
+    if (typeof vorigNiveau === 'number' && niveau !== vorigNiveau) {
+      await this.vuurAf('warmte_niveau_veranderd', { niveau, warmte: nu });
+      if (niveau >= 100 && vorigNiveau < 100) await this.vuurAf('vat_doorgewarmd');
+    }
   }
 
   /** De stand van de doorwarmronde, plus wanneer een lopende ronde begon. */
@@ -213,9 +237,21 @@ class BufferDevice extends Homey.Device {
     await this.stemCapabilitiesAf(LEGIONELLA_CAPS, levert);
     if (!levert) return;
 
-    await this.zet('sb_legionella', Boolean(d.legionella_active));
-    await this.zet('sb_legionella_nodig', Boolean(d.legionella_required));
+    const vorigActief = this.getCapabilityValue('sb_legionella');
+    const vorigNodig = this.getCapabilityValue('sb_legionella_nodig');
+    const actief = Boolean(d.legionella_active);
+    const nodig = Boolean(d.legionella_required);
+
+    await this.zet('sb_legionella', actief);
+    await this.zet('sb_legionella_nodig', nodig);
     await this.zetOfLeeg('sb_legionella_klok', this.tijdstip(d.legionella_start));
+
+    if (typeof vorigActief === 'boolean' && actief !== vorigActief) {
+      await this.vuurAf(actief ? 'legionella_gestart' : 'legionella_klaar');
+    }
+    if (typeof vorigNodig === 'boolean' && nodig && !vorigNodig) {
+      await this.vuurAf('doorwarming_nodig');
+    }
   }
 
   async onDeleted() {
