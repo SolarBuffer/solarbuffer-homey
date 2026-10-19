@@ -1,0 +1,11 @@
+{
+  "type": "number",
+  "title": { "en": "Heat stored", "nl": "Warmtevoorraad" },
+  "units": { "en": "kWh" },
+  "min": 0,
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true
+}

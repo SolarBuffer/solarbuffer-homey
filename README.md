@@ -28,11 +28,33 @@ maakt het bruikbaar in je Flows.
 
 ### Per SolarBuffer
 
-Status, aan of uit, de stand, het vermogen, de energie van vandaag, en een
-boost-knop.
+| | Eenheid | Voorwaarde |
+|---|---|---|
+| Status: Actief, Opstarten, Wachten op teruglevering, Bevroren, Op temperatuur | tekst | |
+| Aan of uit | aan/uit | |
+| Stand | % | |
+| Vermogen | W | |
+| Energie vandaag | kWh | |
+| Boost | knop | |
+| Warmtevoorraad | kWh | hub 0.8.1 of nieuwer |
+| Warmteniveau | % | hub 0.8.1 of nieuwer |
+| Warmtecapaciteit | kWh | hub 0.8.1 of nieuwer |
+| Resterende tijd tot vol | minuten | hub 0.8.1 of nieuwer |
+| Legionellaronde | aan/uit | |
+| Doorwarming nodig | aan/uit | |
+| Ronde gestart | tijdstip | |
+
+De warmtevoorraad is wat er aan energie in het vat zit, tegenover wat er in past.
+Die telt op zolang de boiler stookt, loopt langzaam terug als het vat stilstaat,
+en springt naar vol zodra de thermostaat afslaat. Daar hangt de doorwarming aan
+vast: komt de stand aan het plafond, dan is het vat heet geweest en begint de
+legionellaklok opnieuw. Een ronde stopt dus op energie en niet op de klok, en de
+resterende tijd telt af op het vermogen van dat moment.
 
 Metingen die niet bij jouw installatie horen worden niet aangemaakt. Heb je geen
-accu, dan zie je er ook niets van terug, ook niet in Insights.
+accu, dan zie je er ook niets van terug, ook niet in Insights. Hetzelfde geldt
+voor de warmtevoorraad bij een oudere hub: die rijen komen er pas bij zodra de
+hub ze doorgeeft, zonder dat je het apparaat opnieuw hoeft te koppelen.
 
 ## Flows
 

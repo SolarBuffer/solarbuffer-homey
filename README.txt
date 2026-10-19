@@ -6,7 +6,7 @@ This app brings that to Homey.
 
 WHAT YOU SEE
 
-The status of your installation in one word, your grid power, and for every SolarBuffer what it is drawing and how much it used today. Have solar measurement or a home battery connected, then you see those too, including the battery level.
+The status of your installation in one word, your grid power, and for every SolarBuffer what it is drawing and how much it used today. Have solar measurement or a home battery connected, then you see those too, including the battery level. Per tank you also see how much heat is stored and how long until it is full, and whether a legionella heat-through cycle is running.
 
 WHAT YOU CAN DO
 

@@ -5,6 +5,13 @@ const { zichtbaarNaarRuw, ruwNaarZichtbaar } = require('../../lib/schaal');
 
 const POLL_INTERVAL = 5000;
 
+// Capabilities die alleen bestaan als de hub ze levert. Een hub van voor 0.8.1
+// kent de warmtevoorraad niet; die apparaten houden de oude lijst en krijgen
+// geen rijen die altijd leeg blijven. Werkt de hub bij, dan komen ze er bij de
+// eerstvolgende polling zelf bij, zonder opnieuw koppelen.
+const WARMTE_CAPS = ['sb_warmte', 'sb_warmte_niveau', 'sb_warmte_vol', 'sb_warmte_eta'];
+const LEGIONELLA_CAPS = ['sb_legionella', 'sb_legionella_nodig', 'sb_legionella_klok'];
+
 class BufferDevice extends Homey.Device {
 
   async onInit() {
@@ -100,6 +107,43 @@ class BufferDevice extends Homey.Device {
     await this.setCapabilityValue(capability, waarde).catch(this.error);
   }
 
+  /**
+   * Als zet(), maar leeg mag hier wel. Bij de resterende tijd en de starttijd
+   * van een ronde betekent leeg iets anders dan nul: de hub weet het niet. Dan
+   * hoort er een streepje te staan en niet de waarde van een kwartier terug.
+   */
+  async zetOfLeeg(capability, waarde) {
+    const nieuwe = (waarde === null || waarde === undefined) ? null : waarde;
+    if (this.getCapabilityValue(capability) === nieuwe) return;
+    await this.setCapabilityValue(capability, nieuwe).catch(this.error);
+  }
+
+  /** Capabilities aan- of afzetten op wat deze hub werkelijk doorgeeft. */
+  async stemCapabilitiesAf(lijst, levert) {
+    for (const cap of lijst) {
+      const heeft = this.hasCapability(cap);
+      if (levert && !heeft) {
+        await this.addCapability(cap).catch(this.error);
+      } else if (!levert && heeft) {
+        await this.removeCapability(cap).catch(this.error);
+      }
+    }
+  }
+
+  /** Tijdstip in de tijdzone van de Homey, kort genoeg voor een tegel. */
+  tijdstip(ts) {
+    if (!ts) return null;
+    const datum = new Date(Number(ts) * 1000);
+    if (Number.isNaN(datum.getTime())) return null;
+    return datum.toLocaleString('nl-NL', {
+      timeZone: this.homey.clock.getTimezone(),
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
   async ververs() {
     let hub;
     try {
@@ -133,6 +177,45 @@ class BufferDevice extends Homey.Device {
     // voortdurend mee met het zonoverschot; dat hoort zo.
     const zichtbaar = aan ? (ruwNaarZichtbaar(d.brightness) || 0) : 0;
     await this.zet('dim', Math.round(zichtbaar) / 100);
+
+    await this.warmtevoorraad(d);
+    await this.legionella(d);
+  }
+
+  /**
+   * Hoeveel warmte er in het vat zit en hoe lang het nog duurt voor het vol is.
+   * De hub rekent dat zelf uit; wij rekenen hier alleen seconden naar minuten en
+   * de stand naar een percentage, zodat een flow op een niveau kan wachten.
+   */
+  async warmtevoorraad(d) {
+    const vol = Number(d.warmte_vol_kwh);
+    const levert = d.warmte_vol_kwh !== undefined && d.warmte_vol_kwh !== null
+      && Number.isFinite(vol) && vol > 0;
+    await this.stemCapabilitiesAf(WARMTE_CAPS, levert);
+    if (!levert) return;
+
+    const nu = Number(d.warmte_kwh) || 0;
+    await this.zet('sb_warmte', Math.round(nu * 100) / 100);
+    await this.zet('sb_warmte_vol', Math.round(vol * 100) / 100);
+    await this.zet('sb_warmte_niveau', Math.max(0, Math.min(100, Math.round((nu / vol) * 100))));
+
+    // Leeg zolang er niets in gaat: dan valt er niets af te tellen.
+    const eta = d.warmte_eta_s;
+    const minuten = (eta === null || eta === undefined || !Number.isFinite(Number(eta)))
+      ? null
+      : Math.max(0, Math.round(Number(eta) / 60));
+    await this.zetOfLeeg('sb_warmte_eta', minuten);
+  }
+
+  /** De stand van de doorwarmronde, plus wanneer een lopende ronde begon. */
+  async legionella(d) {
+    const levert = d.legionella_active !== undefined;
+    await this.stemCapabilitiesAf(LEGIONELLA_CAPS, levert);
+    if (!levert) return;
+
+    await this.zet('sb_legionella', Boolean(d.legionella_active));
+    await this.zet('sb_legionella_nodig', Boolean(d.legionella_required));
+    await this.zetOfLeeg('sb_legionella_klok', this.tijdstip(d.legionella_start));
   }
 
   async onDeleted() {

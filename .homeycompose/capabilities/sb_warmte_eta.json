@@ -1,0 +1,11 @@
+{
+  "type": "number",
+  "title": { "en": "Time until full", "nl": "Resterende tijd" },
+  "units": { "en": "min" },
+  "min": 0,
+  "decimals": 0,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": false
+}

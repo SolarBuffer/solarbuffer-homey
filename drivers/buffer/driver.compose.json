@@ -10,6 +10,13 @@
     "dim",
     "measure_power",
     "meter_power",
+    "sb_warmte",
+    "sb_warmte_niveau",
+    "sb_warmte_vol",
+    "sb_warmte_eta",
+    "sb_legionella",
+    "sb_legionella_nodig",
+    "sb_legionella_klok",
     "button"
   ],
   "capabilitiesOptions": {

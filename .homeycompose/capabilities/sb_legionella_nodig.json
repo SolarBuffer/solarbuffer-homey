@@ -1,0 +1,8 @@
+{
+  "type": "boolean",
+  "title": { "en": "Heat-through needed", "nl": "Doorwarming nodig" },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": false
+}

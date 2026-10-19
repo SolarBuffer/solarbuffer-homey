@@ -6,7 +6,7 @@ Deze app brengt dat naar Homey.
 
 WAT JE ZIET
 
-De toestand van je installatie in één woord, je netvermogen, en per SolarBuffer wat hij trekt en hoeveel hij vandaag heeft verbruikt. Heb je een zonnemeting of een thuisbatterij gekoppeld, dan zie je die er ook bij, inclusief de laadstand.
+De toestand van je installatie in één woord, je netvermogen, en per SolarBuffer wat hij trekt en hoeveel hij vandaag heeft verbruikt. Heb je een zonnemeting of een thuisbatterij gekoppeld, dan zie je die er ook bij, inclusief de laadstand. Per boiler zie je ook hoeveel warmte er in het vat zit en hoe lang het nog duurt voor hij vol is, en of er een doorwarmronde tegen legionella loopt.
 
 WAT JE KUNT DOEN
 
