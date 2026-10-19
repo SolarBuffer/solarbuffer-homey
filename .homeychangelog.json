@@ -10,5 +10,8 @@
   },
   "0.1.5": {
     "en": "App-icoon met een uitgeschreven kleur, zodat het overal getekend wordt."
+  },
+  "0.2.0": {
+    "en": "Per SolarBuffer zie je nu de warmtevoorraad in het vat, het niveau, de capaciteit, de resterende tijd tot vol, en of er een doorwarmronde tegen legionella loopt. Op een hub 0.8.1 of nieuwer komen die rijen er zelf bij, zonder opnieuw koppelen."
   }
 }
